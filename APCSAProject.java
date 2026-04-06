@@ -54,8 +54,8 @@ public class APCSAProject {
                 case 2: Sum(); break;
                 case 3: maxAndMin(); break;
                 case 4: frequency(); break;
-                case 5:  break;
-                case 6:  break;
+                case 5: pattern(); break;
+                case 6: transform(); break;
                 case 7:  break;
                 case 8:  break;
                 case 9:  break;
@@ -151,5 +151,41 @@ public class APCSAProject {
         }
 
         System.out.println(val + " appears " + countVal + " times");
+    }
+
+    static void pattern() {
+        int foundRow = -1;
+
+        for (int i = 0; i < rows; i++) {
+            boolean increasing = true;
+
+            for (int j = 1; j < cols; j++) {
+                if (grid[i][j] <= grid[i][j - 1]) {
+                    increasing = false;
+                    break;
+                }
+            }
+
+            if (increasing) {
+                foundRow = i;
+                break;
+            }
+        }
+
+        if (foundRow != -1) {System.out.println("First increasing row found at Row: " + foundRow);} else {System.out.println("No increasing row found.");}
+    }
+
+    static void transform() {
+        System.out.print("Enter two row to swap: ");
+        int r1 = input.nextInt(), r2 = input.nextInt();
+
+        if (r1 >= 0 && r1 < rows && r2 >= 0 && r2 < rows) {
+            int[] t = grid[r1];
+            grid[r1] = grid[r2];
+            grid[r2] = t;
+
+            System.out.println("Rows swapped.");
+            showGrid();
+        }
     }
 }
