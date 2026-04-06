@@ -56,9 +56,9 @@ public class APCSAProject {
                 case 4: frequency(); break;
                 case 5: pattern(); break;
                 case 6: transform(); break;
-                case 7:  break;
-                case 8:  break;
-                case 9:  break;
+                case 7: subgrid(); break;
+                case 8: boundaryDiag(); break;
+                case 9: checkDuplicates(); break;
                 case 0: run = false; System.out.println("End"); break;
                 default: System.out.println("Please choose a valid number");
             }
@@ -172,7 +172,7 @@ public class APCSAProject {
             }
         }
 
-        if (foundRow != -1) {System.out.println("First increasing row found at Row: " + foundRow);} else {System.out.println("No increasing row found.");}
+        if (foundRow != -1) System.out.println("First increasing row found at Row: " + foundRow); else System.out.println("No increasing row found.");
     }
 
     static void transform() {
@@ -187,5 +187,60 @@ public class APCSAProject {
             System.out.println("Rows swapped.");
             showGrid();
         }
+    }
+
+    static void subgrid() {
+        System.out.print("Enter bounds (rs re cs ce): ");
+        int rs = input.nextInt(), re = input.nextInt(), cs = input.nextInt(), ce = input.nextInt();
+
+        if (rs < 0 || re >= rows || cs < 0 || ce >= cols || rs > re || cs > ce) return;
+
+        int sum = 0, max = grid[rs][cs];
+
+        for (int i = rs; i <= re; i++) {
+            for (int j = cs; j <= ce; j++) {
+                int val = grid[i][j];
+                sum += val;
+                max = Math.max(max, val);
+            }
+        }
+
+        System.out.printf("Sum: " + sum +  " Max: " + max);
+    }
+
+    static void boundaryDiag() {
+        System.out.print("Boundary: ");
+        for (int j = 0; j < cols; j++) System.out.print(grid[0][j] + " ");
+        for (int i = 1; i < rows - 1; i++) System.out.print(grid[i][cols - 1] + " ");
+        if (rows > 1) for (int j = cols - 1; j >= 0; j--) System.out.print(grid[rows - 1][j] + " ");
+        if (cols > 1) for (int i = rows - 2; i > 0; i--) System.out.print(grid[i][0] + " ");
+
+        System.out.print("Main Diagonal: ");
+        int size = Math.min(rows, cols);
+        for (int i = 0; i < size; i++) System.out.print(grid[i][i] + " ");
+
+        System.out.print("Secondary Diagonal: ");
+        for (int i = 0; i < size; i++) System.out.print(grid[i][cols - 1 - i] + " ");
+
+        System.out.println();
+    }
+
+    static void checkDuplicates() {
+        boolean duplicates = false;
+
+        for(int i=0; i<rows; i++) {
+            for(int j=0; j<cols; j++) {
+                for(int k=j+1; k<cols; k++) {
+                    if(grid[i][j] == grid[i][k]) {
+                        duplicates = true;
+                        break;
+                    }
+                }
+                if(duplicates) break;
+            }
+            if(duplicates) break;
+        }
+
+        if (duplicates) System.out.println("duplicates found"); else System.out.println("no duplicates");
     }
 }
