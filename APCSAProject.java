@@ -48,12 +48,12 @@ public class APCSAProject {
             System.out.println("0.Exit");
             
             int opt = input.nextInt();
-            
+
             switch(opt) {
                 case 1: showGrid(); break;
                 case 2: Sum(); break;
-                case 3:  break;
-                case 4:  break;
+                case 3: maxAndMin(); break;
+                case 4: frequency(); break;
                 case 5:  break;
                 case 6:  break;
                 case 7:  break;
@@ -115,5 +115,41 @@ public class APCSAProject {
         System.out.println("Sum of Row: " + " (" + sumofrows[maxRow] + ")");
         System.out.println("Sum of Col: " +  " (" + sumofcols[minCol] + ")");
         System.out.println("Sum of All: " +  " (" + (sumofcols[minCol] + sumofrows[maxRow]) + ")");
+    }
+
+    static void maxAndMin() {
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] > max) {
+                    max = grid[i][j];
+                }
+                if (grid[i][j] < min) {
+                    min = grid[i][j];
+                }
+            }
+        }
+
+        System.out.println("Max: " + max);
+        System.out.println("Min: " + min );
+    }
+
+    static void frequency() {
+        System.out.print("Value to count: ");
+        int val = input.nextInt();
+
+        int countVal = 0;
+
+        for(int i=0; i<rows; i++) {
+            for(int j=0; j<cols; j++) {
+                if(grid[i][j] == val) {
+                    countVal++;
+                }
+            }
+        }
+
+        System.out.println(val + " appears " + countVal + " times");
     }
 }
