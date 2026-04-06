@@ -50,8 +50,8 @@ public class APCSAProject {
             int opt = input.nextInt();
             
             switch(opt) {
-                case 1:  break;
-                case 2:  break;
+                case 1: showGrid(); break;
+                case 2: Sum(); break;
                 case 3:  break;
                 case 4:  break;
                 case 5:  break;
@@ -73,5 +73,47 @@ public class APCSAProject {
             }
             System.out.println();
         }
+    }
+
+    static void Sum() {
+        int[] sumofrows = new int[rows];
+        int[] sumofcols = new int[cols];
+
+        for(int i=0; i<rows; i++) {
+            int sum = 0;
+            for(int j=0; j<cols; j++) {
+                sum += grid[i][j];
+            }
+            sumofrows[i] = sum;
+        }
+
+        for(int j=0; j<cols; j++) {
+            int sum = 0;
+            for(int i=0; i<rows; i++) {
+                sum += grid[i][j];
+            }
+            sumofcols[j] = sum;
+        }
+
+        System.out.println("Row sums:");
+        for(int i=0; i<rows; i++) {
+            System.out.println("  Row " + i + ": " + sumofrows[i]);
+        }
+
+        System.out.println("Col sums:");
+        for(int j=0; j<cols; j++) {
+            System.out.println("  Col " + j + ": " + sumofcols[j]);
+        }
+
+        int maxRow = 0, minCol = 0;
+        for(int i=1; i<rows; i++) {
+            if(sumofrows[i] > sumofrows[maxRow]) maxRow = i;
+        }
+        for(int j=1; j<cols; j++) {
+            if(sumofcols[j] < sumofcols[minCol]) minCol = j;
+        }
+        System.out.println("Sum of Row: " + " (" + sumofrows[maxRow] + ")");
+        System.out.println("Sum of Col: " +  " (" + sumofcols[minCol] + ")");
+        System.out.println("Sum of All: " +  " (" + (sumofcols[minCol] + sumofrows[maxRow]) + ")");
     }
 }
