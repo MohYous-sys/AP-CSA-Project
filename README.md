@@ -1,6 +1,6 @@
 # Universal Grid Analyzer(AP CSa Project)
 
-A Java-based tool designed to generate and analyze 2D arrays. This project demonstrates various array traversal techniques, including row-major, column-major, and diagonal traversals.
+https://github.com/MohYous-sys/AP-CSA-Project.git
 
 ## Features
 
